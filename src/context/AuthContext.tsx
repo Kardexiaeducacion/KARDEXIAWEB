@@ -128,7 +128,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (session) {
         // En linea: Intentar descargar perfil actualizado
         if (navigator.onLine) {
-          const { data: profile } = await supabase.from('perfiles').select('*').eq('id', session.user.id).single();
+          const { data: profile } = await supabase.from('usuarios').select('*').eq('id', session.user.id).single();
           if (profile) {
             loggedUser = {
               id: session.user.id,
@@ -220,7 +220,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return false;
       }
 
-      const { data: profile } = await supabase.from('perfiles').select('*').eq('id', data.user.id).single();
+      const { data: profile } = await supabase.from('usuarios').select('*').eq('id', data.user.id).single();
       
       let finalRole: Role = profile?.rol === 'Director' ? 'director' : 'teacher';
       let finalName = profile?.nombre || email.split('@')[0];
@@ -317,7 +317,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       endDate.setDate(endDate.getDate() + 14);
 
       // Create profile in perfiles table
-      const { error: profileError } = await supabase.from('perfiles').insert([{
+      const { error: profileError } = await supabase.from('usuarios').insert([{
         id: authData.user.id,
         nombre: data.name,
         rol: data.role === 'director' ? 'Director' : 'Maestro',
