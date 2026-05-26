@@ -174,7 +174,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           if (pathname !== "/suscripcion") router.replace("/suscripcion");
         } else {
           setSubscriptionActive(true);
-          if (pathname === "/suscripcion" || pathname === "/login" || pathname === "/registro") {
+          if (pathname === "/" || pathname === "/suscripcion" || pathname === "/login" || pathname === "/registro") {
             router.replace("/dashboard");
           }
           

@@ -31,7 +31,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useRouter } from "next/navigation";
 
 const navItems = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Mi Perfil", href: "/perfil", icon: Contact },
   { name: "Alumnos", href: "/alumnos", icon: GraduationCap },
   { name: "Asistencia", href: "/asistencia", icon: Users },
