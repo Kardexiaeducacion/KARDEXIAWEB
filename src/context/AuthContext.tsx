@@ -309,7 +309,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (authError || !authData.user) {
         console.error("SignUp error:", authError);
-        return { success: false, error: "El correo ya está registrado o es inválido." };
+        return { success: false, error: authError?.message || "Ocurrió un error inesperado al crear la cuenta." };
       }
 
       // Start 14-day trial
@@ -319,6 +319,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       // Create profile in perfiles table
       const { error: profileError } = await supabase.from('usuarios').insert([{
         id: authData.user.id,
+        email: data.email,
         nombre: data.name,
         rol: data.role === 'director' ? 'Director' : 'Maestro',
         escuela: data.school,
