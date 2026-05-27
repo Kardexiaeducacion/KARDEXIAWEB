@@ -12,7 +12,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calendar as CalendarIcon, Clock, Edit3, CheckCircle, XCircle } from "lucide-react";
 
 export default function DirectorCitasPage() {
-  const { parents, meetings, addMeeting, updateMeeting } = useAppContext();
+  const { students, meetings, addMeeting, updateMeeting } = useAppContext();
+  const parents = students.filter(s => s.tutor?.name).map(s => ({ id: s.id, name: s.tutor.name, studentName: s.name }));
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newMeeting, setNewMeeting] = useState({
