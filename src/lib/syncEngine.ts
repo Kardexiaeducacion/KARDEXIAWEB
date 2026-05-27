@@ -27,7 +27,7 @@ export class SyncEngine {
 
     // Suscribirse a Supabase Realtime para hacer Pull Inmediato
     this.channel = supabase.channel(`profile_changes_${userId}`)
-      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'perfiles', filter: `id=eq.${userId}` }, async (payload) => {
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'usuarios', filter: `id=eq.${userId}` }, async (payload) => {
         if (this.isSyncing) return; // Si nosotros causamos el update, lo ignoramos
         
         const appData = payload.new.app_data;
@@ -63,7 +63,7 @@ export class SyncEngine {
     
     try {
       const { data: profile } = await supabase
-        .from("perfiles")
+        .from("usuarios")
         .select("app_data, estado_suscripcion")
         .eq("id", this.userId)
         .single();
@@ -162,7 +162,7 @@ export class SyncEngine {
 
       // Guardarlo en la columna app_data
       await supabase
-        .from("perfiles")
+        .from("usuarios")
         .update({ app_data: payload })
         .eq("id", this.userId);
 
