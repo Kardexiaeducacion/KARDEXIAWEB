@@ -60,7 +60,7 @@ export const RootWrapper = ({ children }: { children: React.ReactNode }) => {
   if (isElectron && pathname === "/") return null;
 
   if (isAuthRoute) {
-    return <main className="flex-1 overflow-hidden bg-slate-50">{children}</main>;
+    return <main className="flex-1 overflow-y-auto bg-slate-50">{children}</main>;
   }
 
   if (!currentUser) return null; // Wait for redirect
